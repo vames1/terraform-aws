@@ -10,6 +10,8 @@ resource "aws_instance" "web" {
   associate_public_ip_address = true
 
   tags = {
-    Name = "MyTerraformServer"
+    Name        = "MyTerraformServer-${terraform.workspace}"
+    Environment = terraform.workspace
   }
 }
+

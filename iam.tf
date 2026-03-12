@@ -1,9 +1,9 @@
 resource "aws_iam_user" "dev_user" {
-  name = "terraform-user-2"
+  name = "terraform-user-${terraform.workspace}"
 
   tags = {
     Description = "IAM user created with Terraform"
-    Environment = "Dev"
+    Environment = terraform.workspace
   }
 }
 
