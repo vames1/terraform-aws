@@ -1,9 +1,9 @@
 resource "aws_s3_bucket" "my_bucket" {
-  bucket = "my-terraform-bucket-${terraform.workspace}-725115072836"
+  bucket = var.bucket_name
 
   tags = {
     Name        = "MyTerraformBucket"
-    Environment = terraform.workspace
+    Environment = var.environment
   }
 }
 

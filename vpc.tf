@@ -1,33 +1,32 @@
-# Create VPC
 resource "aws_vpc" "main" {
-  cidr_block = "10.0.0.0/16"
+  cidr_block = var.vpc_cidr
 
   tags = {
-    Name = "MyTerraformVPC"
+    Name        = "MyTerraformVPC-${var.environment}"
+    Environment = var.environment
   }
 }
 
-# Create Subnet
 resource "aws_subnet" "public" {
   vpc_id            = aws_vpc.main.id
-  cidr_block        = "10.0.1.0/24"
+  cidr_block        = var.subnet_cidr
   availability_zone = "us-east-1a"
 
   tags = {
-    Name = "MyPublicSubnet"
+    Name        = "MyPublicSubnet-${var.environment}"
+    Environment = var.environment
   }
 }
 
-# Create Internet Gateway
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name = "MyInternetGateway"
+    Name        = "MyInternetGateway-${var.environment}"
+    Environment = var.environment
   }
 }
 
-# Create Route Table
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.main.id
 
@@ -37,11 +36,11 @@ resource "aws_route_table" "public" {
   }
 
   tags = {
-    Name = "MyPublicRouteTable"
+    Name        = "MyPublicRouteTable-${var.environment}"
+    Environment = var.environment
   }
 }
 
-# Associate Route Table with Subnet
 resource "aws_route_table_association" "public" {
   subnet_id      = aws_subnet.public.id
   route_table_id = aws_route_table.public.id
