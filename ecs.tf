@@ -70,6 +70,14 @@ resource "aws_ecs_service" "web" {
     assign_public_ip = true
   }
 
+  load_balancer {
+    target_group_arn = aws_lb_target_group.web.arn
+    container_name   = "my-web-app"
+    container_port   = 80
+  }
+
+  depends_on = [aws_lb_listener.web]
+
   tags = {
     Name        = "MyWebService"
     Environment = var.environment
