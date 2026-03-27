@@ -27,6 +27,7 @@ variable "bucket_name" {
   description = "S3 bucket name"
   type        = string
 }
+
 variable "db_username" {
   description = "Database username"
   type        = string
@@ -38,6 +39,7 @@ variable "db_password" {
   type        = string
   sensitive   = true
 }
+
 variable "alert_email" {
   description = "Email address for CloudWatch alerts"
   type        = string
